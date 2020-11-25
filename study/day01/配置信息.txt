@@ -1,0 +1,36 @@
+文件夹：
+    创建一个go代码放置的工作文件夹
+    在该文件夹下面创建一下三个文件夹：
+        src：你未来代码项目放置的地方
+        bin：你所有执行go代码的插件等工具的存放目录
+        pkg：包管理文件夹
+
+
+环境变量：
+    GOROOT=“你安装go的文件夹”
+    GOPATH="你想把go代码文件放置的文件夹"
+    Path=”%GOPATH%\bin“和“%GOROOT%\bin”
+    GO111MODULE=auto
+
+
+
+安装插件：
+    参考做法：
+        以下为手动安装的工具的步骤:
+
+        在%GOPATH%\src\目录下，建立路径golang.org\x
+        进入到%GOPATH%\src\golang.org\x，下载需要工具的源码git clone https://github.com/golang/tools.git tools
+        clone完成后，会生成一个tools文件夹，这样工具所需要的源码已经准备好了
+        进入到%GOPATH%下，执行
+
+        go install github.com/ramya-rao-a/go-outline
+        go install github.com/acroca/go-symbols
+        go install golang.org/x/tools/cmd/guru
+        go install golang.org/x/tools/cmd/gorename
+        go install github.com/rogpeppe/godef
+        go install github.com/sqs/goreturns
+        go install github.com/cweill/gotests/gotests
+    实践做法（反正我成功了）：
+        使用Git cmd进入到%GOPATH%\src\github.com\golang下面git clone https://github.com/golang/tools.git tools
+        clone，在golang文件夹下出现一个tools文件夹，将其复制到%GOPATH%\src\golang.org\x下面，然后进去到vscode快捷键Ctrl+shift+p
+        输入go install进入全选安装成功

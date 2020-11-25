@@ -1,0 +1,47 @@
+空标识符一般用于4种场合
+
+1. 引入某包只执行包中的init函数，但本包没有直接引用该包任何变量或函数，使用import _避免编译错误；
+    ```
+    import _ "net/http/pprof"
+    import _ "net/http/pprof"
+    ```
+
+2. 函数有多返回值，忽略其中某些返回值。类似c++11 std::ignore在std::tie中的运用；
+    ```
+    for _, c := range "11234" {
+        log.Println(c)
+    }
+    ```
+
+3. 编译期检查，比如某类型有没有实现某接口的检查；
+    ```
+    var _ io.Reader = (* XXX)(nil)  //全局变量
+    ```
+
+4. 想在main之前执行某段代码，当然用init也可以。
+    ```
+    var _ = Suite(&HelloWorldTest{})
+    ```
+
+实例：
+package main
+import "fmt"
+func main() {
+  var i1 int
+  var f1 float32
+  i1, _, f1 = ThreeValues()
+  fmt.Printf("The int: %d, the float: %f \n", i1, f1)
+}
+func ThreeValues() (int, int, float32) {
+  return 5, 6, 7.5
+}
+
+输出结果：
+
+The int: 5, the float: 7.500000
+
+
+
+
+
+
